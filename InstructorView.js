@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Dimensions
 } from 'react-native';
 import GridView from 'react-native-super-grid';
 import CampaignView from './CampaignView';
+
+var {height, width} = Dimensions.get('window');
 
 export default class BackgroundImage extends Component{
     render() {
@@ -40,7 +43,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
       },
     gridView: {
-      paddingTop: 10,
+      paddingTop: 0,
       flex: 5,
       borderBottomColor: 'black',
       borderBottomWidth: 1,
@@ -50,23 +53,25 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'flex-end',
       borderRadius: 5,
-      padding: 8,
-      height: 85,
+      height: 55,
+      margin:0,
     },
     itemName: {
-      flex: 3,
-      fontSize: 30,
+      flex: 2,
+      fontSize: 20,
       color: '#878CCC',
       fontWeight: '300',
+      margin:0,
     },
     itemCode: {
-      flex: 3,
+      flex: 2,
       fontWeight: '200',
-      fontSize: 16,
+      fontSize: 12,
       color: '#000',
+      margin:0,
     },
     campaignView:{
-      flex: 1.5,
+      flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
     },

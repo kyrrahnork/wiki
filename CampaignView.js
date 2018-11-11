@@ -4,7 +4,6 @@ import { RecyclerListView, DataProvider } from 'recyclerlistview';
 import { DataCall } from './utils/DataCall';
 import { LayoutUtil } from './utils/LayoutUtil';
 import { ImageRenderer } from './components/ImageRenderer';
-import { ViewSelector } from './components/ViewSelector';
 
 var {height, width} = Dimensions.get('window');
 
@@ -74,21 +73,15 @@ export default class App extends Component {
     //Only render RLV once you have the data
     return (
       <View style={styles.container}>
-        <ViewSelector
-          viewType={this.state.viewType}
-          viewChange={this.viewChangeHandler}
+          <RecyclerListView
+            style={{ flex: 1, width:width }}
+            contentContainerStyle={{ margin: 3 }}
+            onEndReached={this.handleListEnd}
+            dataProvider={this.state.dataProvider}
+            layoutProvider={this.state.layoutProvider}
+            rowRenderer={this.rowRenderer}
+            renderFooter={this.renderFooter}
         />
-        {this.state.count > 0
-          ? <RecyclerListView
-              style={{ flex: 1, width:width }}
-              contentContainerStyle={{ margin: 3 }}
-              onEndReached={this.handleListEnd}
-              dataProvider={this.state.dataProvider}
-              layoutProvider={this.state.layoutProvider}
-              rowRenderer={this.rowRenderer}
-              renderFooter={this.renderFooter}
-            />
-          : null}
       </View>
     );
   }
@@ -96,7 +89,7 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     alignItems: 'stretch',
     justifyContent: 'space-between',
   },
