@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#ABA6FF",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "center",
     },
     header: {
         fontSize: 25
