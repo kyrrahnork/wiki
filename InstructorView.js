@@ -3,10 +3,12 @@ import {
     View,
     Text,
     StyleSheet,
+    Dimensions
 } from 'react-native';
 import GridView from 'react-native-super-grid';
 import CampaignView from './CampaignView';
 
+var {height, width} = Dimensions.get('window');
 
 export default class BackgroundImage extends Component{
     render() {
