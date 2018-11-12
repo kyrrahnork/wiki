@@ -10,11 +10,13 @@ import CampaignView from './CampaignView';
 
 var {height, width} = Dimensions.get('window');
 
+var jsonCourse = require("./courses");
+
 export default class BackgroundImage extends Component{
     render() {
         const resizeMode = 'center';
         const items = [
-            { name: '843', code: 'Courses' }, { name: '17741', code: 'Students' },
+            { name: '843', code: 'Courses' }, { name: jsonCourse.courses[0].Editors, code: 'Students' },
             { name: '13M', code: 'Words Added' }, { name: '661M', code: 'Views' },
             { name: '16.6K', code: 'Created' }, { name: '3.19K', code: 'Uploads' },
           ];

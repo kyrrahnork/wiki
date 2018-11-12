@@ -1,0 +1,7 @@
+{"campaigns":[
+	{"id":1,"title":"Communicating Science","courses":[123,234,345,456]},
+	{"id":2,"title":"Future of Facts","courses":[567,678]},
+	{"id":3,"title":"Linguistic Society of America","courses":[123,789]},
+	{"id":4,"title":"National Communication Association","courses":[890,124]},
+	{"id":5,"title":"American Chemical Society","courses":[235]}
+]}
