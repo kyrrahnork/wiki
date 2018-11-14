@@ -22,18 +22,19 @@ var viewsNum = 0;
 var createdNum = 0;
 var editsNum = 0;
 
+for(var i in jsonCourse.courses){
+  if (campaignId == jsonCourse.courses[i].campaignId){
+    coursesNum += 1;
+    studentsNum += jsonCourse.courses[i].editors;
+    wordsNum += jsonCourse.courses[i].wordsAdded;
+    viewsNum += jsonCourse.courses[i].views;
+    createdNum += jsonCourse.courses[i].created;
+    editsNum += jsonCourse.courses[i].recentEdits;
+  }
+}
+
 export default class BackgroundImage extends Component{
     render() {
-        for(var i in jsonCourse.courses){
-          if (campaignId == jsonCourse.courses[i].campaignId){
-            coursesNum += 1;
-            studentsNum += jsonCourse.courses[i].editors;
-            wordsNum += jsonCourse.courses[i].wordsAdded;
-            viewsNum += jsonCourse.courses[i].views;
-            createdNum += jsonCourse.courses[i].created;
-            editsNum += jsonCourse.courses[i].recentEdits;
-          }
-        }
         const resizeMode = 'center';
         const items = [
             { name: coursesNum, code: 'Courses' }, { name: studentsNum, code: 'Students' },

@@ -7,8 +7,8 @@ class LogoTitle extends React.Component {
   render() {
     return (
       <Image
-        source={require('./assets/splash.png')}
-        style={{ width: 30, height: 30 }}
+        source={require('./assets/logo.png')}
+        style={{ width: 40, height: 40 }}
       />
     );
   }
@@ -36,7 +36,7 @@ render() {
           accessibilityLabel="Instructor Account"
           onPress={()=>this.props.navigation.navigate('InstructorView')}
     />
-      
+
       <Button style={styles.button}
           title="Student Account"
           color="#841584"
