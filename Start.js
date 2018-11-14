@@ -25,24 +25,26 @@ static navigationOptions = {
 }
 
 render() {
-
-
   return (
     <View style={styles.container}>
 
+    <Text style={styles.textLarge}>
+      Welcome!
+    </Text>
+    <Text style={styles.textSmall}>
+      Looks like you haven't joined a course yet.
+    </Text>
+    <Text style={styles.textSmall}>
+      Take a look at the WikiEdu Campaigns!
+    </Text>
+
     <Button style={styles.button}
-          title="Instructor Account"
-          color="#841584"
-          accessibilityLabel="Instructor Account"
-          onPress={()=>this.props.navigation.navigate('InstructorView')}
+      title="Find your Course"
+      color="#878CCC"
+      accessibilityLabel="Instructor Account"
+      onPress={()=>this.props.navigation.navigate('InstructorView')}
     />
 
-      <Button style={styles.button}
-          title="Student Account"
-          color="#841584"
-          accessibilityLabel="Student Account"
-          onPress={()=>this.props.navigation.navigate('StudentView')}
-      />
     </View>
   );
 }
@@ -58,5 +60,16 @@ button: {
   flex: 1,
   alignItems: 'center',
   justifyContent: 'center',
+  paddingTop:5,
+},
+textLarge: {
+  fontSize:40,
+  color: '#878CCC',
+  padding:10,
+},
+textSmall: {
+  fontSize:16,
+  color:'#000',
+  padding:5,
 }
 });
