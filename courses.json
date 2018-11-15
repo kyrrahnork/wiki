@@ -1,0 +1,12 @@
+{"courses":[
+	{"id":123,"campaignId":1,"title":"Voice Disorders","recentEdits":81,"wordsAdded":758000,"views":200000,"editors":1234,"created":20},
+	{"id":234,"campaignId":1,"title":"Your Place in Nature","recentEdits":45,"wordsAdded":6000,"views":570,"editors":16,"created":20},
+	{"id":345,"campaignId":1,"title":"Introduction to Language","recentEdits":33,"wordsAdded":13200,"views":142000,"editors":666,"created":20},
+	{"id":456,"campaignId":1,"title":"Main Group Chemistry","recentEdits":22,"wordsAdded":7350,"views":470,"editors":14,"created":20},
+	{"id":567,"campaignId":2,"title":"Public Opinion and Voting Behavior","recentEdits":20,"wordsAdded":6870,"views":124000,"editors":425,"created":20},
+	{"id":678,"campaignId":2,"title":"Politics of Climate Change","recentEdits":3,"wordsAdded":1680,"views":14000,"editors":101,"created":20},
+	{"id":789,"campaignId":3,"title":"Child Language","recentEdits":5,"wordsAdded":17900,"views":518000,"editors":44,"created":20},
+	{"id":890,"campaignId":4,"title":"Online Communities","recentEdits":24,"wordsAdded":8130,"views":51400,"editors":68,"created":20},
+	{"id":124,"campaignId":4,"title":"Resistance and Subversion on the Internet","recentEdits":11,"wordsAdded":1450,"views":1230,"editors":28,"created":20},
+	{"id":235,"campaignId":5,"title":"Main Group Chemistry","recentEdits":22,"wordsAdded":7350,"views":5000,"editors":88,"created":20}
+]}

@@ -10,13 +10,36 @@ import CampaignView from './CampaignView';
 
 var {height, width} = Dimensions.get('window');
 
+var jsonCourse = require("./courses");
+var jsonCampaign = require("./campaigns");
+
+var campaignId = jsonCampaign.campaigns[0].id;
+
+var coursesNum = 0;
+var studentsNum = 0;
+var wordsNum = 0;
+var viewsNum = 0;
+var createdNum = 0;
+var editsNum = 0;
+
+for(var i in jsonCourse.courses){
+  if (campaignId == jsonCourse.courses[i].campaignId){
+    coursesNum += 1;
+    studentsNum += jsonCourse.courses[i].editors;
+    wordsNum += jsonCourse.courses[i].wordsAdded;
+    viewsNum += jsonCourse.courses[i].views;
+    createdNum += jsonCourse.courses[i].created;
+    editsNum += jsonCourse.courses[i].recentEdits;
+  }
+}
+
 export default class BackgroundImage extends Component{
     render() {
         const resizeMode = 'center';
         const items = [
-            { name: '843', code: 'Courses' }, { name: '17741', code: 'Students' },
-            { name: '13M', code: 'Words Added' }, { name: '661M', code: 'Views' },
-            { name: '16.6K', code: 'Created' }, { name: '3.19K', code: 'Uploads' },
+            { name: coursesNum, code: 'Courses' }, { name: studentsNum, code: 'Students' },
+            { name: wordsNum, code: 'Words Added' }, { name: viewsNum, code: 'Views' },
+            { name: createdNum, code: 'Created' }, { name: editsNum, code: 'Edits' },
           ];
     return (
     <View style={styles.container}>
