@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import GridView from 'react-native-super-grid';
 import CampaignView from './CampaignView';
+import FlatListDemo from './FlatListDemo';
 
 var {height, width} = Dimensions.get('window');
 
@@ -43,7 +44,10 @@ export default class BackgroundImage extends Component{
           ];
     return (
     <View style={styles.container}>
-        <GridView
+        <Text style={styles.textLarge}>
+          Active Campaigns
+        </Text>
+        {/* <GridView
             items={items}
             style={styles.gridView}
             renderItem={item => (
@@ -52,8 +56,8 @@ export default class BackgroundImage extends Component{
                 <Text style={styles.itemCode}>{item.code}</Text>
             </View>
             )}
-        />
-        <CampaignView />
+        /> */}
+        <FlatListDemo />
     </View>
     )
     }
@@ -97,5 +101,10 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    textLarge: {
+      fontSize:30,
+      color: '#878CCC',
+      paddingTop:60,
     },
   });

@@ -21,7 +21,8 @@ export default class Start extends React.Component {
 
 static navigationOptions = {
     // headerTitle instead of title
-    headerTitle: <LogoTitle />,
+    // headerTitle: <LogoTitle />,
+    header: null,
 }
 
 render() {

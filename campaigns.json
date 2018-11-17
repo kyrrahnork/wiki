@@ -3,5 +3,10 @@
 	{"id":2,"title":"Future of Facts","courses":[567,678]},
 	{"id":3,"title":"Linguistic Society of America","courses":[789]},
 	{"id":4,"title":"National Communication Association","courses":[890,124]},
-	{"id":5,"title":"American Chemical Society","courses":[235]}
+	{"id":5,"title":"American Chemical Society","courses":[235]},
+	{"id":6,"title":"Communicating Science","courses":[123,234,345,456]},
+	{"id":7,"title":"Future of Facts","courses":[567,678]},
+	{"id":8,"title":"Linguistic Society of America","courses":[789]},
+	{"id":9,"title":"National Communication Association","courses":[890,124]},
+	{"id":10,"title":"American Chemical Society","courses":[235]}
 ]}
