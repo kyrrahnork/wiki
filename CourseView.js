@@ -1,15 +1,19 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
-    View,
-    Text,
-    StyleSheet,
-    Dimensions
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  FlatList, 
+  TouchableHighlight
 } from 'react-native';
+import { List, ListItem, } from "react-native-elements";
 import GridView from 'react-native-super-grid';
 import CampaignView from './CampaignView';
 import FlatListDemo from './FlatListDemo';
 
-var {height, width} = Dimensions.get('window');
+
+var { height, width } = Dimensions.get('window');
 
 var jsonCourse = require("./courses");
 var jsonCampaign = require("./campaigns");
@@ -23,8 +27,8 @@ var viewsNum = 0;
 var createdNum = 0;
 var editsNum = 0;
 
-for(var i in jsonCourse.courses){
-  if (campaignId == jsonCourse.courses[i].campaignId){
+for (var i in jsonCourse.courses) {
+  if (campaignId == jsonCourse.courses[i].campaignId) {
     coursesNum += 1;
     studentsNum += jsonCourse.courses[i].editors;
     wordsNum += jsonCourse.courses[i].wordsAdded;
@@ -34,16 +38,40 @@ for(var i in jsonCourse.courses){
   }
 }
 
-export default class BackgroundImage extends Component{
-    render() {
-        const resizeMode = 'center';
-        const items = [
-            { name: coursesNum, code: 'Courses' }, { name: studentsNum, code: 'Students' },
-            { name: wordsNum, code: 'Words Added' }, { name: viewsNum, code: 'Views' },
-            { name: createdNum, code: 'Created' }, { name: editsNum, code: 'Edits' },
-          ];
+export default class BackgroundImage extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: jsonCampaign,
+    }
+  }
+
+  renderSeparator = () => {
     return (
-    <View style={styles.container}>
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#CED0CE",
+          marginLeft: "0%"
+        }}
+      />
+    );
+  };
+
+
+
+  render() {
+    const resizeMode = 'center';
+    const items = [
+      { name: coursesNum, code: 'Courses' }, { name: studentsNum, code: 'Students' },
+      { name: wordsNum, code: 'Words Added' }, { name: viewsNum, code: 'Views' },
+      { name: createdNum, code: 'Created' }, { name: editsNum, code: 'Edits' },
+    ];
+    return (
+      <View style={styles.container}>
         <Text style={styles.textLarge}>
           Active Campaigns
         </Text>
@@ -57,54 +85,78 @@ export default class BackgroundImage extends Component{
             </View>
             )}
         /> */}
-        <FlatListDemo />
-    </View>
+        <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width:width, }}>
+        <FlatList
+          data={this.state.data.campaigns}
+          renderItem={({ item }) => ( 
+            <TouchableHighlight 
+            
+              onPress={() => this.props.navigation.navigate('Start')}              
+            >
+      
+              {/* <View style= {{width: width, height: height/6}} >
+                <Text> {item.title} </Text>
+                <Text> {item.title} </Text>
+              </View>     */}
+              
+              <ListItem
+                title={item.title}
+                subtitle={item.id}
+                containerStyle={{ borderBottomWidth: 0, height: height/6,}}
+              />
+
+            </TouchableHighlight>
+          )}
+          ItemSeparatorComponent={this.renderSeparator}
+        />
+      </List>
+      </View>
     )
-    }
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-    gridView: {
-      paddingTop: 0,
-      flex: 5,
-      borderBottomColor: 'black',
-      borderBottomWidth: 1,
-      marginBottom: 0,
-    },
-    itemContainer: {
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      borderRadius: 5,
-      height: 55,
-      margin:0,
-    },
-    itemName: {
-      flex: 2,
-      fontSize: 20,
-      color: '#878CCC',
-      fontWeight: '300',
-      margin:0,
-    },
-    itemCode: {
-      flex: 2,
-      fontWeight: '200',
-      fontSize: 12,
-      color: '#000',
-      margin:0,
-    },
-    campaignView:{
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    textLarge: {
-      fontSize:30,
-      color: '#878CCC',
-      paddingTop:60,
-    },
-  });
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  gridView: {
+    paddingTop: 0,
+    flex: 5,
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+    marginBottom: 0,
+  },
+  itemContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    borderRadius: 5,
+    height: 55,
+    margin: 0,
+  },
+  itemName: {
+    flex: 2,
+    fontSize: 20,
+    color: '#878CCC',
+    fontWeight: '300',
+    margin: 0,
+  },
+  itemCode: {
+    flex: 2,
+    fontWeight: '200',
+    fontSize: 12,
+    color: '#000',
+    margin: 0,
+  },
+  campaignView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textLarge: {
+    fontSize: 30,
+    color: '#878CCC',
+    paddingTop: 60,
+  },
+});
