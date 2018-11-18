@@ -4,8 +4,6 @@ import Start from'./Start'
 import CourseView from './CourseView';
 import Login from './Login';
 import TestView from './TestView';
-import FlatListDemo from './FlatListDemo';
-
 console.disableYellowBox = true;
 
 const RootStack = createStackNavigator(
@@ -14,9 +12,8 @@ const RootStack = createStackNavigator(
     Start: Start,
     CourseView: CourseView,
     TestView: TestView,
-    FlatListDemo: FlatListDemo,
-
   },
+  
   {
     initialRouteName: 'Login'
   }

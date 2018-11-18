@@ -38,6 +38,7 @@ class FlatListDemo extends Component {
           data={this.state.data.campaigns}
           renderItem={({ item }) => ( 
             <TouchableHighlight 
+            
               onPress={() => alert(item.title + " Pressed")}              
             >
       
