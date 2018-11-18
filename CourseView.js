@@ -91,7 +91,7 @@ export default class BackgroundImage extends Component {
           renderItem={({ item }) => ( 
             <TouchableHighlight 
             
-              onPress={() => this.props.navigation.navigate('Start')}              
+              onPress={() => this.props.navigation.navigate('TestView')}              
             >
       
               {/* <View style= {{width: width, height: height/6}} >
