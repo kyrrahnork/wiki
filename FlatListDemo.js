@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, FlatList, TouchableHighlight, Dimensions } from "react-native";
-import { List, ListItem, SearchBar } from "react-native-elements";
+import { View, Text, FlatList, TouchableHighlight, Dimensions, } from "react-native";
+import { List, ListItem, } from "react-native-elements";
 
 var {height, width} = Dimensions.get('window');
 
 var jsonCampaign = require("./campaigns");
+
+
 
 class FlatListDemo extends Component {
   constructor(props) {
@@ -13,8 +15,7 @@ class FlatListDemo extends Component {
     this.state = {
       data:jsonCampaign,
     }
-  } 
-
+  }
 
   renderSeparator = () => {
     return (
@@ -30,17 +31,28 @@ class FlatListDemo extends Component {
   };
 
   render() {
+    
     return (
       <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width:width, }}>
         <FlatList
           data={this.state.data.campaigns}
-          renderItem={({ item }) => (     
-            <ListItem
-              title={item.title}
-              subtitle={item.id}
-              containerStyle={{ borderBottomWidth: 0, height: height/6,}}
+          renderItem={({ item }) => ( 
+            <TouchableHighlight 
+              onPress={() => alert(item.title + " Pressed")}              
+            >
+      
+              {/* <View style= {{width: width, height: height/6}} >
+                <Text> {item.title} </Text>
+                <Text> {item.title} </Text>
+              </View>     */}
               
-            />
+              <ListItem
+                title={item.title}
+                subtitle={item.id}
+                containerStyle={{ borderBottomWidth: 0, height: height/6,}}
+              />
+
+            </TouchableHighlight>
           )}
           ItemSeparatorComponent={this.renderSeparator}
         />

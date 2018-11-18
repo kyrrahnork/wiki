@@ -5,7 +5,7 @@ console.disableYellowBox = true;
 
 var {height, width} = Dimensions.get('window');
 
-export default class Start extends React.Component {
+export default class TestView extends React.Component {
     state = {
       userType: 'Instructor'
     }
