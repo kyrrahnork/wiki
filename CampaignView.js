@@ -1,96 +1,153 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, ActivityIndicator, Dimensions } from 'react-native';
-import { RecyclerListView, DataProvider } from 'recyclerlistview';
-import { DataCall } from './utils/DataCall';
-import { LayoutUtil } from './utils/LayoutUtil';
-import { ImageRenderer } from './components/ImageRenderer';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  FlatList, 
+  TouchableHighlight
+} from 'react-native';
+import { List, ListItem, } from "react-native-elements";
+import GridView from 'react-native-super-grid';
 
-var {height, width} = Dimensions.get('window');
 
-export default class App extends Component {
-  constructor(props) { 
+var { height, width } = Dimensions.get('window');
+
+var jsonCourse = require("./courses");
+var jsonCampaign = require("./campaigns");
+
+var campaignId = jsonCampaign.campaigns[0].id;
+
+var coursesNum = 0;
+var studentsNum = 0;
+var wordsNum = 0;
+var viewsNum = 0;
+var createdNum = 0;
+var editsNum = 0;
+
+for (var i in jsonCourse.courses) {
+  if (campaignId == jsonCourse.courses[i].campaignId) {
+    coursesNum += 1;
+    studentsNum += jsonCourse.courses[i].editors;
+    wordsNum += jsonCourse.courses[i].wordsAdded;
+    viewsNum += jsonCourse.courses[i].views;
+    createdNum += jsonCourse.courses[i].created;
+    editsNum += jsonCourse.courses[i].recentEdits;
+  }
+}
+
+export default class BackgroundImage extends Component {
+
+  constructor(props) {
     super(props);
+
     this.state = {
-      dataProvider: new DataProvider((r1, r2) => {
-        return r1 !== r2;
-      }),
-      layoutProvider: LayoutUtil.getLayoutProvider(0),
-      images: [],
-      count: 0,
-      viewType: 0,
-    };
-    this.inProgressNetworkReq = false;
-  }
-  componentWillMount() {
-    this.fetchMoreData();
-  }
-  async fetchMoreData() {
-    if (!this.inProgressNetworkReq) { 
-      //To prevent redundant fetch requests. Needed because cases of quick up/down scroll can trigger onEndReached
-      //more than once
-      this.inProgressNetworkReq = true;
-      const images = await DataCall.get(this.state.count, 20);
-      this.inProgressNetworkReq = false;
-      this.setState({
-        dataProvider: this.state.dataProvider.cloneWithRows(
-          this.state.images.concat(images)
-        ),
-        images: this.state.images.concat(images),
-        count: this.state.count + 20,
-      });
+      data: jsonCampaign,
     }
   }
-  rowRenderer = (type, data) => {
-    //We have only one view type so not checks are needed here
-    return <ImageRenderer imageUrl={data} />;
-  };
-  viewChangeHandler = viewType => {
-    //We will create a new layout provider which will trigger context preservation maintaining the first visible index
-    this.setState({
-      layoutProvider: LayoutUtil.getLayoutProvider(viewType),
-      viewType: viewType,
-    });
-  };
-  handleListEnd = () => {
-    this.fetchMoreData();
 
-    //This is necessary to ensure that activity indicator inside footer gets rendered. This is required given the implementation I have done in this sample
-    this.setState({});
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#CED0CE",
+          marginLeft: "0%"
+        }}
+      />
+    );
   };
-  renderFooter = () => {
-    //Second view makes sure we don't unnecessarily change height of the list on this event. That might cause indicator to remain invisible
-    //The empty view can be removed once you've fetched all the data
-    return this.inProgressNetworkReq
-      ? <ActivityIndicator
-          style={{ margin: 10 }}
-          size="large"
-          color={'black'}
-        />
-      : <View style={{ height: 60 }} />;
-  };
+
+
 
   render() {
-    //Only render RLV once you have the data
+    const resizeMode = 'center';
+    const items = [
+      { name: coursesNum, code: 'Courses' }, { name: studentsNum, code: 'Students' },
+      { name: wordsNum, code: 'Words Added' }, { name: viewsNum, code: 'Views' },
+      { name: createdNum, code: 'Created' }, { name: editsNum, code: 'Edits' },
+    ];
     return (
       <View style={styles.container}>
-          <RecyclerListView
-            style={{ flex: 1, width:width }}
-            contentContainerStyle={{ margin: 3 }}
-            onEndReached={this.handleListEnd}
-            dataProvider={this.state.dataProvider}
-            layoutProvider={this.state.layoutProvider}
-            rowRenderer={this.rowRenderer}
-            renderFooter={this.renderFooter}
+        <Text style={styles.textLarge}>
+          Active Campaigns
+        </Text>
+        {/* <GridView
+            items={items}
+            style={styles.gridView}
+            renderItem={item => (
+            <View style={[styles.itemContainer,]}>
+                <Text style={styles.itemName}>{item.name}</Text>
+                <Text style={styles.itemCode}>{item.code}</Text>
+            </View>
+            )}
+        /> */}
+        <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width:width, }}>
+        <FlatList
+          data={this.state.data.campaigns}
+          renderItem={({ item }) => ( 
+            <TouchableHighlight            
+              onPress={() => this.props.navigation.navigate('CourseView')}              
+            >
+              <ListItem
+                title={item.title}
+                subtitle={item.id}
+                containerStyle={{ borderBottomWidth: 0, height: height/6,}}
+              />
+
+            </TouchableHighlight>
+          )}
+          ItemSeparatorComponent={this.renderSeparator}
         />
+      </List>
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  gridView: {
+    paddingTop: 0,
+    flex: 5,
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+    marginBottom: 0,
+  },
+  itemContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    borderRadius: 5,
+    height: 55,
+    margin: 0,
+  },
+  itemName: {
     flex: 2,
-    alignItems: 'stretch',
-    justifyContent: 'space-between',
+    fontSize: 20,
+    color: '#878CCC',
+    fontWeight: '300',
+    margin: 0,
+  },
+  itemCode: {
+    flex: 2,
+    fontWeight: '200',
+    fontSize: 12,
+    color: '#000',
+    margin: 0,
+  },
+  campaignView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textLarge: {
+    fontSize: 30,
+    color: '#878CCC',
+    paddingTop: 60,
   },
 });

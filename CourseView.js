@@ -9,8 +9,6 @@ import {
 } from 'react-native';
 import { List, ListItem, } from "react-native-elements";
 import GridView from 'react-native-super-grid';
-import CampaignView from './CampaignView';
-import FlatListDemo from './FlatListDemo';
 
 
 var { height, width } = Dimensions.get('window');
@@ -18,7 +16,7 @@ var { height, width } = Dimensions.get('window');
 var jsonCourse = require("./courses");
 var jsonCampaign = require("./campaigns");
 
-var campaignId = jsonCampaign.campaigns[0].id;
+var campaignId = jsonCourse.courses[0].id;
 
 var coursesNum = 0;
 var studentsNum = 0;
@@ -44,7 +42,7 @@ export default class BackgroundImage extends Component {
     super(props);
 
     this.state = {
-      data: jsonCampaign,
+      data: jsonCourse,
     }
   }
 
@@ -72,10 +70,7 @@ export default class BackgroundImage extends Component {
     ];
     return (
       <View style={styles.container}>
-        <Text style={styles.textLarge}>
-          Active Campaigns
-        </Text>
-        {/* <GridView
+        <GridView
             items={items}
             style={styles.gridView}
             renderItem={item => (
@@ -84,21 +79,14 @@ export default class BackgroundImage extends Component {
                 <Text style={styles.itemCode}>{item.code}</Text>
             </View>
             )}
-        /> */}
-        <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width:width, }}>
+        />
+        <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width:width, flex:2,}}>
         <FlatList
-          data={this.state.data.campaigns}
+          data={this.state.data.courses}
           renderItem={({ item }) => ( 
-            <TouchableHighlight 
-            
+            <TouchableHighlight            
               onPress={() => this.props.navigation.navigate('TestView')}              
             >
-      
-              {/* <View style= {{width: width, height: height/6}} >
-                <Text> {item.title} </Text>
-                <Text> {item.title} </Text>
-              </View>     */}
-              
               <ListItem
                 title={item.title}
                 subtitle={item.id}
@@ -117,46 +105,55 @@ export default class BackgroundImage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
   gridView: {
-    paddingTop: 0,
-    flex: 5,
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
+    paddingTop: 25,
+    flex: 3,
     marginBottom: 0,
   },
+  // listView:{
+  //   borderTopWidth: 0,
+  //   borderBottomWidth: 0,
+  //   width:width,
+  // },
+  // listItem:{
+  //   flex: 3,
+  //   width:width,
+  //   height: height/6,
+  //   borderBottomWidth: 0,
+  // },
   itemContainer: {
     alignItems: 'center',
     justifyContent: 'flex-end',
     borderRadius: 5,
     height: 55,
-    margin: 0,
+    margin:0,
   },
   itemName: {
     flex: 2,
     fontSize: 20,
     color: '#878CCC',
     fontWeight: '300',
-    margin: 0,
+    margin:0,
   },
   itemCode: {
     flex: 2,
     fontWeight: '200',
     fontSize: 12,
     color: '#000',
-    margin: 0,
+    margin:0,
   },
-  campaignView: {
+  campaignView:{
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   textLarge: {
-    fontSize: 30,
+    fontSize:30,
     color: '#878CCC',
-    paddingTop: 60,
+    paddingTop:60,
   },
 });

@@ -43,7 +43,7 @@ render() {
       title="Find your Course"
       color="#878CCC"
       accessibilityLabel="Instructor Account"
-      onPress={()=>this.props.navigation.navigate('CourseView')}
+      onPress={()=>this.props.navigation.navigate('CampaignView')}
     />
 
     </View>
