@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  FlatList, 
+  FlatList,
   TouchableHighlight
 } from 'react-native';
 import { List, ListItem, } from "react-native-elements";
@@ -16,8 +16,7 @@ var { height, width } = Dimensions.get('window');
 var jsonCourse = require("./courses");
 var jsonCampaign = require("./campaigns");
 
-var campaignId = jsonCourse.courses[0].id;
-
+var campaignId = jsonCampaign.campaigns[0].id;
 var coursesNum = 0;
 var studentsNum = 0;
 var wordsNum = 0;
@@ -37,7 +36,6 @@ for (var i in jsonCourse.courses) {
 }
 
 export default class BackgroundImage extends Component {
-
   constructor(props) {
     super(props);
 
@@ -59,9 +57,8 @@ export default class BackgroundImage extends Component {
     );
   };
 
-
-
   render() {
+
     const resizeMode = 'center';
     const items = [
       { name: coursesNum, code: 'Courses' }, { name: studentsNum, code: 'Students' },
@@ -70,22 +67,25 @@ export default class BackgroundImage extends Component {
     ];
     return (
       <View style={styles.container}>
-        <GridView
-            items={items}
-            style={styles.gridView}
-            renderItem={item => (
-            <View style={[styles.itemContainer,]}>
-                <Text style={styles.itemName}>{item.name}</Text>
-                <Text style={styles.itemCode}>{item.code}</Text>
-            </View>
-            )}
+      <Text style={styles.textLarge}>
+        Campaign Statistics
+      </Text>
+      <GridView
+          items={items}
+          style={styles.gridView}
+          renderItem={item => (
+          <View style={[styles.itemContainer,]}>
+              <Text style={styles.itemName}>{item.name}</Text>
+              <Text style={styles.itemCode}>{item.code}</Text>
+          </View>
+          )}
         />
         <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width:width, flex:2,}}>
         <FlatList
           data={this.state.data.courses}
-          renderItem={({ item }) => ( 
-            <TouchableHighlight            
-              onPress={() => this.props.navigation.navigate('TestView')}              
+          renderItem={({ item }) => (
+            <TouchableHighlight
+              onPress={() => this.props.navigation.navigate('TestView')}
             >
               <ListItem
                 title={item.title}
@@ -154,6 +154,6 @@ const styles = StyleSheet.create({
   textLarge: {
     fontSize:30,
     color: '#878CCC',
-    paddingTop:60,
+    paddingTop:10,
   },
 });
