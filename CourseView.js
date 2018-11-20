@@ -16,7 +16,7 @@ var { height, width } = Dimensions.get('window');
 var jsonCourse = require("./courses");
 var jsonCampaign = require("./campaigns");
 
-var campaignId = jsonCampaign.campaigns[0].id;
+// initialize the variables
 var coursesNum = 0;
 var studentsNum = 0;
 var wordsNum = 0;
@@ -24,18 +24,8 @@ var viewsNum = 0;
 var createdNum = 0;
 var editsNum = 0;
 
-for (var i in jsonCourse.courses) {
-  if (campaignId == jsonCourse.courses[i].campaignId) {
-    coursesNum += 1;
-    studentsNum += jsonCourse.courses[i].editors;
-    wordsNum += jsonCourse.courses[i].wordsAdded;
-    viewsNum += jsonCourse.courses[i].views;
-    createdNum += jsonCourse.courses[i].created;
-    editsNum += jsonCourse.courses[i].recentEdits;
-  }
-}
+export default class BackgroundImage extends React.Component {
 
-export default class BackgroundImage extends Component {
   constructor(props) {
     super(props);
 
@@ -58,6 +48,19 @@ export default class BackgroundImage extends Component {
   };
 
   render() {
+    const {navigation} = this.props;
+    const campaignId = navigation.getParam('id', '86');
+
+    for (var i in jsonCourse.courses) {
+      if (campaignId == jsonCourse.courses[i].campaignId) {
+        coursesNum += 1;
+        studentsNum += jsonCourse.courses[i].editors;
+        wordsNum += jsonCourse.courses[i].wordsAdded;
+        viewsNum += jsonCourse.courses[i].views;
+        createdNum += jsonCourse.courses[i].created;
+        editsNum += jsonCourse.courses[i].recentEdits;
+      }
+    }
 
     const resizeMode = 'center';
     const items = [
@@ -65,6 +68,15 @@ export default class BackgroundImage extends Component {
       { name: wordsNum, code: 'Words Added' }, { name: viewsNum, code: 'Views' },
       { name: createdNum, code: 'Created' }, { name: editsNum, code: 'Edits' },
     ];
+
+    //reset the variables after each loop
+    coursesNum = 0;
+    studentsNum = 0;
+    wordsNum = 0;
+    viewsNum = 0;
+    createdNum = 0;
+    editsNum = 0;
+
     return (
       <View style={styles.container}>
       <Text style={styles.textLarge}>
