@@ -1,50 +1,138 @@
-import React from 'react';
-import { StyleSheet, Text, Dimensions, View, } from 'react-native';
+import React, { Component } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions
+} from 'react-native';
+import { List, ListItem, } from "react-native-elements";
+import GridView from 'react-native-super-grid';
 
 console.disableYellowBox = true;
 
-var {height, width} = Dimensions.get('window');
+var { height, width } = Dimensions.get('window');
+
+var jsonCourse = require("./courses");
+var jsonCampaign = require("./campaigns");
+
+// initialize the variables
+var coursesNum = 0;
+var studentsNum = 0;
+var wordsNum = 0;
+var viewsNum = 0;
+var createdNum = 0;
+var editsNum = 0;
 
 export default class TestView extends React.Component {
-    state = {
-      userType: 'Instructor'
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: jsonCourse,
     }
-  
-  static navigationOptions = {
-      // headerTitle instead of title
-      // headerTitle: <LogoTitle />,
-      header: null,
   }
-  
+
   render() {
+    const {navigation} = this.props;
+    const campaignId = navigation.getParam('id', '86');
+
+    for (var i in jsonCourse.courses) {
+      if (campaignId == jsonCourse.courses[i].id) {
+        coursesNum += jsonCourse.courses[i].id;
+        studentsNum += jsonCourse.courses[i].editors;
+        wordsNum += jsonCourse.courses[i].wordsAdded;
+        viewsNum += jsonCourse.courses[i].views;
+        createdNum += jsonCourse.courses[i].created;
+        editsNum += jsonCourse.courses[i].recentEdits;
+      }
+    }
+
+    const resizeMode = 'center';
+    const items = [
+      { name: coursesNum, code: 'CourseId' }, { name: studentsNum, code: 'Students' },
+      { name: wordsNum, code: 'Words Added' }, { name: viewsNum, code: 'Views' },
+      { name: createdNum, code: 'Created' }, { name: editsNum, code: 'Edits' },
+    ];
+
+    //reset the variables after each instance
+    coursesNum = 0;
+    studentsNum = 0;
+    wordsNum = 0;
+    viewsNum = 0;
+    createdNum = 0;
+    editsNum = 0;
+
     return (
       <View style={styles.container}>
-  
-        <Text style={styles.textLarge}>
-            Welcome!
-        </Text>
-        <Text style={styles.textSmall}>
-            Your click worked!!!.
-        </Text>  
+      <Text style={styles.textLarge}>
+        Course Statistics
+      </Text>
+      <GridView
+          items={items}
+          style={styles.gridView}
+          renderItem={item => (
+          <View style={[styles.itemContainer,]}>
+              <Text style={styles.itemName}>{item.name}</Text>
+              <Text style={styles.itemCode}>{item.code}</Text>
+          </View>
+          )}
+        />
       </View>
-    );
+    )
   }
-  }
-  
-  const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+}
+
+const styles = StyleSheet.create({
+  container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
-    textLarge: {
-        fontSize:40,
-        color: '#878CCC',
-        padding:10,
-    },
-    textSmall: {
-        fontSize:16,
-        color:'#000',
-        padding:5,
-    }
-  });
+  gridView: {
+    paddingTop: 25,
+    flex: 3,
+    marginBottom: 0,
+  },
+  // listView:{
+  //   borderTopWidth: 0,
+  //   borderBottomWidth: 0,
+  //   width:width,
+  // },
+  // listItem:{
+  //   flex: 3,
+  //   width:width,
+  //   height: height/6,
+  //   borderBottomWidth: 0,
+  // },
+  itemContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    borderRadius: 5,
+    height: 55,
+    margin:0,
+  },
+  itemName: {
+    flex: 2,
+    fontSize: 20,
+    color: '#878CCC',
+    fontWeight: '300',
+    margin:0,
+  },
+  itemCode: {
+    flex: 2,
+    fontWeight: '200',
+    fontSize: 12,
+    color: '#000',
+    margin:0,
+  },
+  campaignView:{
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textLarge: {
+    fontSize:30,
+    color: '#878CCC',
+    paddingTop:10,
+  },
+});

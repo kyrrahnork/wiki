@@ -69,7 +69,7 @@ export default class BackgroundImage extends React.Component {
       { name: createdNum, code: 'Created' }, { name: editsNum, code: 'Edits' },
     ];
 
-    //reset the variables after each loop
+    //reset the variables after each instance
     coursesNum = 0;
     studentsNum = 0;
     wordsNum = 0;
@@ -97,7 +97,7 @@ export default class BackgroundImage extends React.Component {
           data={this.state.data.courses}
           renderItem={({ item }) => (
             <TouchableHighlight
-              onPress={() => this.props.navigation.navigate('TestView')}
+              onPress={() => this.props.navigation.navigate('TestView', {id: item.id,})}
             >
               <ListItem
                 title={item.title}
