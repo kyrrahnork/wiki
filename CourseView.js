@@ -77,6 +77,15 @@ export default class BackgroundImage extends React.Component {
     createdNum = 0;
     editsNum = 0;
 
+    // initialize an empty json object to mimic our json file and fill it with only courses from that specific campaign
+    var campaignCourses = '{"courses":[]}';
+    var jsonObj = JSON.parse(campaignCourses);
+    for (var i in jsonCourse.courses) {
+      if (campaignId == jsonCourse.courses[i].campaignId){
+        jsonObj['courses'].push({"id":jsonCourse.courses[i].id,"campaignId":jsonCourse.courses[i].campaignId,"title":jsonCourse.courses[i].title,"recentEdits":jsonCourse.courses[i].recentEdits,"wordsAdded":jsonCourse.courses[i].wordsAdded,"views":jsonCourse.courses[i].views,"editors":jsonCourse.courses[i].editors,"created":jsonCourse.courses[i].created});
+      }
+    }
+
     return (
       <View style={styles.container}>
       <Text style={styles.textLarge}>
@@ -94,16 +103,16 @@ export default class BackgroundImage extends React.Component {
         />
         <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width:width, flex:2,}}>
         <FlatList
-          data={this.state.data.courses}
+          data={jsonObj.courses}
           renderItem={({ item }) => (
             <TouchableHighlight
               onPress={() => this.props.navigation.navigate('TestView', {id: item.id,})}
             >
-              <ListItem
-                title={item.title}
-                subtitle={item.id}
-                containerStyle={{ borderBottomWidth: 0, height: height/6,}}
-              />
+            <ListItem
+              title={item.title}
+              subtitle={item.id}
+              containerStyle={{ borderBottomWidth: 0, height: height/6,}}
+            />
 
             </TouchableHighlight>
           )}
