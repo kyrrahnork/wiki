@@ -51,6 +51,10 @@ export default class BackgroundImage extends React.Component {
     const {navigation} = this.props;
     const campaignId = navigation.getParam('id', '86');
 
+    // initialize an empty json object to mimic our json file and fill it with only courses from that specific campaign
+    var campaignCourses = '{"courses":[]}';
+    var jsonObj = JSON.parse(campaignCourses);
+
     for (var i in jsonCourse.courses) {
       if (campaignId == jsonCourse.courses[i].campaignId) {
         coursesNum += 1;
@@ -59,6 +63,7 @@ export default class BackgroundImage extends React.Component {
         viewsNum += jsonCourse.courses[i].views;
         createdNum += jsonCourse.courses[i].created;
         editsNum += jsonCourse.courses[i].recentEdits;
+        jsonObj['courses'].push({"id":jsonCourse.courses[i].id,"campaignId":jsonCourse.courses[i].campaignId,"title":jsonCourse.courses[i].title});
       }
     }
 
@@ -76,15 +81,6 @@ export default class BackgroundImage extends React.Component {
     viewsNum = 0;
     createdNum = 0;
     editsNum = 0;
-
-    // initialize an empty json object to mimic our json file and fill it with only courses from that specific campaign
-    var campaignCourses = '{"courses":[]}';
-    var jsonObj = JSON.parse(campaignCourses);
-    for (var i in jsonCourse.courses) {
-      if (campaignId == jsonCourse.courses[i].campaignId){
-        jsonObj['courses'].push({"id":jsonCourse.courses[i].id,"campaignId":jsonCourse.courses[i].campaignId,"title":jsonCourse.courses[i].title,"recentEdits":jsonCourse.courses[i].recentEdits,"wordsAdded":jsonCourse.courses[i].wordsAdded,"views":jsonCourse.courses[i].views,"editors":jsonCourse.courses[i].editors,"created":jsonCourse.courses[i].created});
-      }
-    }
 
     return (
       <View style={styles.container}>
