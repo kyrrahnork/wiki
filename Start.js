@@ -26,12 +26,20 @@ static navigationOptions = {
 }
 
 render() {
+  const { navigation } = this.props;
+  const name = navigation.getParam('name');
   return (
     <View style={styles.container}>
 
     <Text style={styles.textLarge}>
       Welcome!
     </Text>
+    
+    {/* the name prop to be used to distinguish users courses */}
+    <Text style={styles.textMedium}>
+     {JSON.stringify(name)}
+     </Text>
+    
     <Text style={styles.textSmall}>
       Looks like you haven't joined a course yet.
     </Text>
@@ -67,6 +75,11 @@ textLarge: {
   fontSize:40,
   color: '#878CCC',
   padding:10,
+},
+textMedium: {
+  fontSize:20,
+  color: '#878CCC',
+  padding:5,
 },
 textSmall: {
   fontSize:16,
