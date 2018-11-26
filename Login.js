@@ -35,7 +35,7 @@ export default class Login extends React.Component {
                     name: result.user.name,
                     photoUrl: result.user.photoUrl
                 }, () => {
-                    this.props.navigation.navigate("Start", this.state);
+                    this.props.navigation.navigate("Start", this.state, this.name);
                 });
             } else {
                 console.log("cancelled")
@@ -78,6 +78,8 @@ const LoggedInPage = props => {
         </View>
     );
 }
+
+
 
 const styles = StyleSheet.create({
     container: {
