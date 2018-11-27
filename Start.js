@@ -1,7 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, Image, View, Button } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  Button,
+  FlatList,
+  TouchableHighlight,
+  Dimensions } from 'react-native';
+import { List, ListItem, } from "react-native-elements";
 
 console.disableYellowBox = true;
+
+var { height, width } = Dimensions.get('window');
+
+var jsonCourse = require("./courses");
+var jsonUsers = require("./users");
 
 class LogoTitle extends React.Component {
   render() {
@@ -15,48 +29,133 @@ class LogoTitle extends React.Component {
 }
 
 export default class Start extends React.Component {
-  state = {
-    userType: 'Instructor'
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: jsonCourse,
+    }
   }
 
-static navigationOptions = {
-    // headerTitle instead of title
-    // headerTitle: <LogoTitle />,
-    header: null,
-}
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#CED0CE",
+          marginLeft: "0%"
+        }}
+      />
+    );
+  };
 
-render() {
-  const { navigation } = this.props;
-  const name = navigation.getParam('name');
-  return (
-    <View style={styles.container}>
+  static navigationOptions = {
+      // headerTitle instead of title
+      // headerTitle: <LogoTitle />,
+      header: null,
+  }
 
-    <Text style={styles.textLarge}>
-      Welcome!
-    </Text>
-    
-    {/* the name prop to be used to distinguish users courses */}
-    <Text style={styles.textMedium}>
-     {JSON.stringify(name)}
-     </Text>
-    
-    <Text style={styles.textSmall}>
-      Looks like you haven't joined a course yet.
-    </Text>
-    <Text style={styles.textSmall}>
-      Take a look at the WikiEdu Campaigns!
-    </Text>
+  render() {
+    const { navigation } = this.props;
+    const name = navigation.getParam('name');
 
-    <Button style={styles.button}
-      title="Find your Course"
-      color="#878CCC"
-      accessibilityLabel="Instructor Account"
-      onPress={()=>this.props.navigation.navigate('CampaignView')}
-    />
+    var userExists = null;
 
-    </View>
-  );
-}
+    for (var i in jsonUsers.users) {
+      if (name == jsonUsers.users[i].id){
+        userExists = true;
+      }
+    }
+
+    // initialize an empty json object to mimic our json file and fill it with only courses from that specific user
+    var userCourses = '{"courses":[]}';
+    var userJsonObj = JSON.parse(userCourses);
+
+    if (userExists == true){
+      for (var i in jsonCourse.courses) {
+        for (var j in jsonUsers.users){
+          for (var k in jsonUsers.users[j].courses){
+            if(jsonCourse.courses[i].id == jsonUsers.users[j].courses[k]){
+              userJsonObj['courses'].push({"id":jsonCourse.courses[i].id,"title":jsonCourse.courses[i].title});
+            }
+          }
+          // stop after user is found
+          break;
+        }
+      }
+    }
+
+    if (userExists == null){
+      return (
+          <View style={styles.container}>
+          <Text style={styles.textLarge}>
+              Welcome!
+          </Text>
+          <Text style={styles.textMedium}>
+              {JSON.stringify(name)}
+          </Text>
+          <Text style={styles.textSmall}>
+             Looks like you haven't joined a course yet.
+          </Text>
+          <Text style={styles.textSmall}>
+             Take a look at the WikiEdu Campaigns!
+          </Text>
+          <Button style={styles.button}
+             title="Find your Course"
+             color="#878CCC"
+             accessibilityLabel="Instructor Account"
+             onPress={()=>this.props.navigation.navigate('CampaignView')}
+          />
+          </View>
+          );
+    } else {
+      return (
+          <View style={styles.container}>
+          <Text style={styles.textLarge}>
+              Welcome!
+          </Text>
+          <Text style={styles.textMedium}>
+              {JSON.stringify(name)}
+          </Text>
+          <Text style={styles.textSmall}>
+             Looks like you're signed up for a few courses!
+          </Text>
+          <Text style={styles.textSmall}>
+             Take a look at other WikiEdu Campaigns!
+          </Text>
+          <Button style={styles.button}
+             title="Find your Course"
+             color="#878CCC"
+             accessibilityLabel="Instructor Account"
+             onPress={()=>this.props.navigation.navigate('CampaignView')}
+          />
+          <Text style={styles.textMedium}>
+            Your Courses
+          </Text>
+          <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width:width, flex:2,}}>
+          <FlatList
+            data={userJsonObj.courses}
+            renderItem={({ item }) => (
+              <TouchableHighlight
+                onPress={() => this.props.navigation.navigate('TestView', {id: item.id,})}
+              >
+              <ListItem
+                title={item.title}
+                subtitle={item.id}
+                containerStyle={{ borderBottomWidth: 0, height: height/6,}}
+              />
+
+              </TouchableHighlight>
+            )}
+            ItemSeparatorComponent={this.renderSeparator}
+          />
+        </List>
+        </View>
+        );
+      }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -85,5 +184,26 @@ textSmall: {
   fontSize:16,
   color:'#000',
   padding:5,
-}
+},
+itemContainer: {
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  borderRadius: 5,
+  height: 55,
+  margin:0,
+},
+itemName: {
+  flex: 2,
+  fontSize: 20,
+  color: '#878CCC',
+  fontWeight: '300',
+  margin:0,
+},
+itemCode: {
+  flex: 2,
+  fontWeight: '200',
+  fontSize: 12,
+  color: '#000',
+  margin:0,
+  }
 });
