@@ -65,7 +65,8 @@ export default class Start extends React.Component {
 
     for (var i in jsonUsers.users) {
       if (name == jsonUsers.users[i].id){
-        userExists = true;
+        userExists = jsonUsers.users[i].id;
+        break;
       }
     }
 
@@ -73,17 +74,15 @@ export default class Start extends React.Component {
     var userCourses = '{"courses":[]}';
     var userJsonObj = JSON.parse(userCourses);
 
-    if (userExists == true){
-      for (var i in jsonCourse.courses) {
-        for (var j in jsonUsers.users){
-          for (var k in jsonUsers.users[j].courses){
-            if(jsonCourse.courses[i].id == jsonUsers.users[j].courses[k]){
-              userJsonObj['courses'].push({"id":jsonCourse.courses[i].id,"title":jsonCourse.courses[i].title});
-            }
+    for (var i in jsonCourse.courses) {
+      for (var j in jsonUsers.users){
+        for (var k in jsonUsers.users[j].courses){
+          if(jsonCourse.courses[i].id == jsonUsers.users[j].courses[k]){
+            userJsonObj['courses'].push({"id":jsonCourse.courses[i].id,"title":jsonCourse.courses[i].title});
           }
-          // stop after user is found
-          break;
         }
+        // stop after user is found
+        break;
       }
     }
 
@@ -131,7 +130,7 @@ export default class Start extends React.Component {
              accessibilityLabel="Instructor Account"
              onPress={()=>this.props.navigation.navigate('CampaignView')}
           />
-          <Text style={styles.textMedium}>
+          <Text style={styles.textLarge}>
             Your Courses
           </Text>
           <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width:width, flex:2,}}>
