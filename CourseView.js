@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   View,
+  Image,
   Text,
   StyleSheet,
   Dimensions,
@@ -46,6 +47,16 @@ export default class BackgroundImage extends React.Component {
       />
     );
   };
+
+  static navigationOptions = {
+    //Page title and image
+    title: 'Courses',
+    headerRight: <Image
+      title= "Start"
+      source={require('./assets/logo.png')}
+      style={{ width: 40, height: 40, marginRight:30,}}
+    />
+}
 
   render() {
     const {navigation} = this.props;
@@ -131,17 +142,6 @@ const styles = StyleSheet.create({
     flex: 3,
     marginBottom: 0,
   },
-  // listView:{
-  //   borderTopWidth: 0,
-  //   borderBottomWidth: 0,
-  //   width:width,
-  // },
-  // listItem:{
-  //   flex: 3,
-  //   width:width,
-  //   height: height/6,
-  //   borderBottomWidth: 0,
-  // },
   itemContainer: {
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -162,11 +162,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#000',
     margin:0,
-  },
-  campaignView:{
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   textLarge: {
     fontSize:30,

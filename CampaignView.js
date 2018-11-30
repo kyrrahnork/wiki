@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   View,
+  Image,
   Text,
   StyleSheet,
   Dimensions,
@@ -8,8 +9,6 @@ import {
   TouchableHighlight
 } from 'react-native';
 import { List, ListItem, } from "react-native-elements";
-import GridView from 'react-native-super-grid';
-
 
 var { height, width } = Dimensions.get('window');
 
@@ -37,6 +36,16 @@ export default class BackgroundImage extends Component {
       />
     );
   };
+
+  static navigationOptions = {
+    //Page title and image
+    title: 'Campaigns',
+    headerRight: <Image
+      title= "Start"
+      source={require('./assets/logo.png')}
+      style={{ width: 40, height: 40, marginRight:30,}}
+    />
+}
 
   render() {
     const resizeMode = 'center';
@@ -70,32 +79,6 @@ export default class BackgroundImage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  itemContainer: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    borderRadius: 5,
-    height: 55,
-    margin: 0,
-  },
-  itemName: {
-    flex: 2,
-    fontSize: 20,
-    color: '#878CCC',
-    fontWeight: '300',
-    margin: 0,
-  },
-  itemCode: {
-    flex: 2,
-    fontWeight: '200',
-    fontSize: 12,
-    color: '#000',
-    margin: 0,
-  },
-  campaignView: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
   View,
+  Image,
   Text,
   StyleSheet,
   Dimensions
 } from 'react-native';
-import { List, ListItem, } from "react-native-elements";
 import GridView from 'react-native-super-grid';
 
 console.disableYellowBox = true;
@@ -31,6 +31,16 @@ export default class TestView extends React.Component {
       data: jsonCourse,
     }
   }
+
+  static navigationOptions = {
+    //Page title and image
+    title: 'Tests',
+    headerRight: <Image
+      title= "Tests"
+      source={require('./assets/logo.png')}
+      style={{ width: 40, height: 40, marginRight:30,}}
+    />
+}
 
   render() {
     const {navigation} = this.props;

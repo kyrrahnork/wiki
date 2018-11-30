@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, Image, View, Button, ScrollView } from 'react-native';
 import Expo from "expo";
 import { androidClientId } from "./superSecretKey";
-import { paddedString } from 'uuid-js';
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -84,7 +83,6 @@ const LoggedInPage = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#ABA6FF",
         alignItems: "center",
         justifyContent: "center",
     },
@@ -99,10 +97,5 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderRadius: 150
     },
-    button: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
 })
 

@@ -21,6 +21,7 @@ class LogoTitle extends React.Component {
   render() {
     return (
       <Image
+        title= "Start"
         source={require('./assets/logo.png')}
         style={{ width: 40, height: 40 }}
       />
@@ -52,9 +53,13 @@ export default class Start extends React.Component {
   };
 
   static navigationOptions = {
-      // headerTitle instead of title
-      // headerTitle: <LogoTitle />,
-      header: null,
+      //Page title and image
+      title: 'Start',
+      headerRight: <Image
+        title= "Start"
+        source={require('./assets/logo.png')}
+        style={{ width: 40, height: 40, marginRight:30,}}
+      />
   }
 
   render() {
@@ -127,7 +132,7 @@ export default class Start extends React.Component {
           <Button style={styles.button}
              title="Find your Course"
              color="#878CCC"
-             accessibilityLabel="Instructor Account"
+             accessibilityLabel="Find your Course"
              onPress={()=>this.props.navigation.navigate('CampaignView')}
           />
           <Text style={styles.textLarge}>
@@ -184,25 +189,4 @@ textSmall: {
   color:'#000',
   padding:5,
 },
-itemContainer: {
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  borderRadius: 5,
-  height: 55,
-  margin:0,
-},
-itemName: {
-  flex: 2,
-  fontSize: 20,
-  color: '#878CCC',
-  fontWeight: '300',
-  margin:0,
-},
-itemCode: {
-  flex: 2,
-  fontWeight: '200',
-  fontSize: 12,
-  color: '#000',
-  margin:0,
-  }
 });
