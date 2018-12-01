@@ -43,7 +43,7 @@ export default class BackgroundImage extends Component {
     headerRight: <Image
       title= "Start"
       source={require('./assets/logo.png')}
-      style={{ width: 40, height: 40, marginRight:30,}}
+      style={{ width: 40, height: 40, marginRight:15,}}
     />
 }
 

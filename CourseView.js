@@ -50,13 +50,13 @@ export default class BackgroundImage extends React.Component {
 
   static navigationOptions = {
     //Page title and image
-    title: 'Courses',
+    title: 'Campaign Courses',
     headerRight: <Image
       title= "Start"
       source={require('./assets/logo.png')}
-      style={{ width: 40, height: 40, marginRight:30,}}
+      style={{ width: 40, height: 40, marginRight:15,}}
     />
-}
+  }
 
   render() {
     const {navigation} = this.props;

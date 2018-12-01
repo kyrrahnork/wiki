@@ -15,6 +15,7 @@ export default class Login extends React.Component {
             body: 'Say something!',
         }
     }
+
     static navigationOptions = {
         header: null,
         headerTitle: <Login />,

@@ -38,7 +38,7 @@ export default class TestView extends React.Component {
     headerRight: <Image
       title= "Tests"
       source={require('./assets/logo.png')}
-      style={{ width: 40, height: 40, marginRight:30,}}
+      style={{ width: 40, height: 40, marginRight:15,}}
     />
 }
 

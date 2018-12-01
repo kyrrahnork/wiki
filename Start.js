@@ -10,7 +10,6 @@ import {
   Dimensions
 } from 'react-native';
 import { List, ListItem, } from "react-native-elements";
-import { Notifications } from "expo";
 
 console.disableYellowBox = true;
 
@@ -54,17 +53,29 @@ export default class Start extends React.Component {
     );
   };
 
+  static handleFunction = () => {
+    this.state.signedIn ='false';
+    this.props.navigation.navigate('Login');
+  };
+
   static navigationOptions = {
     //Page title and image
     title: 'Start',
-    headerRight: <Image
-      title="Start"
-      source={require('./assets/logo.png')}
-      style={{ width: 40, height: 40, marginRight: 30, }}
-    />
+    // headerRight: <Image
+    //   title="Start"
+    //   source={require('./assets/logo.png')}
+    //   style={{ width: 40, height: 40, marginRight: 15, }}
+    // />,
+    headerRight: (<Button
+      onPress={() => alert('logout')}
+        title="Logout"
+        color="#000"
+        />
+    ),
+    headerLeft: null,
   }
 
-
+  
 
   render() {
     const { navigation } = this.props;
@@ -95,6 +106,8 @@ export default class Start extends React.Component {
       }
     }
 
+    var newName = name;
+
     if (userExists == null) {
       return (
         <View style={styles.container}>
@@ -102,7 +115,7 @@ export default class Start extends React.Component {
             Welcome!
           </Text>
           <Text style={styles.textMedium}>
-            {JSON.stringify(name)}
+            {newName.replace(/['"]+/g, '')}
           </Text>
           <Text style={styles.textSmall}>
             Looks like you haven't joined a course yet.
@@ -114,13 +127,7 @@ export default class Start extends React.Component {
             title="Find your Course"
             color="#878CCC"
             accessibilityLabel="Instructor Account"
-            onPress={() => this.props.navigation.navigate('CampaignView')}
-          />
-          <Button style={styles.button}
-            title="Notifications?"
-            color="#878CCC"
-            accessibilityLabel="Push Notifications"
-            onPress={() => this.props.navigation.navigate('PushNotifications')}
+            onPress={() => this.props.navigation.navigate('Login')}
           />
         </View>
       );
@@ -128,10 +135,7 @@ export default class Start extends React.Component {
       return (
         <View style={styles.container}>
           <Text style={styles.textLarge}>
-            Welcome!
-          </Text>
-          <Text style={styles.textMedium}>
-            {JSON.stringify(name)}
+            Welcome, {JSON.stringify(name)}!
           </Text>
           <Text style={styles.textSmall}>
             Looks like you're signed up for a few courses!
@@ -145,15 +149,11 @@ export default class Start extends React.Component {
             accessibilityLabel="Find your Course"
             onPress={() => this.props.navigation.navigate('CampaignView')}
           />
-          <Button style={styles.buttonNotifications}
-            title="Notifications?"
-            color="#878CCC"
-            accessibilityLabel="Push Notifications"
-            onPress={() => this.props.navigation.navigate('PushNotifications')}
-          />
-          <Text style={styles.textLarge}>
+          <Text style={styles.textXLarge}></Text>
+          <Text style={styles.textMedium}>
             Your Courses
           </Text>
+          
           <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width: width, flex: 2, }}>
             <FlatList
               data={userJsonObj.courses}
@@ -195,14 +195,20 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     margin: 8,
     padding: 8,
+  },  
+  textXLarge: {
+    fontSize: 55,
+    padding:20,
   },
   textLarge: {
     fontSize: 40,
     color: '#878CCC',
     padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   textMedium: {
-    fontSize: 20,
+    fontSize: 30,
     color: '#878CCC',
     padding: 5,
   },
