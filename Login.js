@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, Image, View, Button, ScrollView } from 'react-native';
 import Expo from "expo";
 import { androidClientId } from "./superSecretKey";
+import { Permissions, Notifications } from 'expo';
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -9,7 +10,9 @@ export default class Login extends React.Component {
         this.state = {
             signedIn: false,
             name: "",
-            photoUrl: ""
+            photoUrl: "",
+            title: 'Hello World',
+            body: 'Say something!',
         }
     }
     static navigationOptions = {
@@ -43,6 +46,47 @@ export default class Login extends React.Component {
             console.log("error", e)
         }
     }
+
+    async registerForPushNotifications() {
+        const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    
+        if (status !== 'granted') {
+          const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+          if (status !== 'granted') {
+            return;
+          }
+        }
+    
+        const token = await Notifications.getExpoPushTokenAsync();
+    
+        this.subscription = Notifications.addListener(this.handleNotification);
+    
+        this.setState({
+          token,
+        });
+      }
+    
+      sendPushNotification(token = this.state.token, title = this.state.title, body = this.state.body) {
+        return fetch('https://exp.host/--/api/v2/push/send', {
+          body: JSON.stringify({
+            to: token,
+            title: title,
+            body: body,
+            data: { message: `${title} - ${body}` },
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+        });
+      }
+    
+      handleNotification = notification => {
+        this.setState({
+          notification,
+        });
+      };
+    
 
     render() {
         const { navigate } = this.props.navigation;
