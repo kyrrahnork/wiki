@@ -5,6 +5,7 @@ import CampaignView from './CampaignView';
 import CourseView from './CourseView';
 import Login from './Login';
 import TestView from './TestView';
+import PushNotifications from './PushNotifications';
 console.disableYellowBox = true;
 
 const RootStack = createStackNavigator(
@@ -14,6 +15,7 @@ const RootStack = createStackNavigator(
     CampaignView: CampaignView,
     CourseView: CourseView,
     TestView: TestView,
+    PushNotifications: PushNotifications,
   },
   
   {
