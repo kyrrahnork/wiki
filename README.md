@@ -1,4 +1,4 @@
-# WikiEDU
+# WikiEDU Dashboard
 Connecting Higher Ed and Wikipedia
 Wiki Education dashboard for Wikipedia editing projects.
 
