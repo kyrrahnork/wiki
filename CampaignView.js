@@ -59,7 +59,7 @@ export default class BackgroundImage extends Component {
           data={this.state.data.campaigns}
           renderItem={({ item }) => (
             <TouchableHighlight
-              onPress={() => this.props.navigation.navigate('CourseView', {id: item.id,})}
+              onPress={() => this.props.navigation.navigate('CampaignInfo', {id: item.id,})}
             >
               <ListItem
                 title={item.title}

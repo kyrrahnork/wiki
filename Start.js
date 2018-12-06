@@ -60,22 +60,14 @@ export default class Start extends React.Component {
 
   static navigationOptions = {
     //Page title and image
-    title: 'Start',
-    // headerRight: <Image
-    //   title="Start"
-    //   source={require('./assets/logo.png')}
-    //   style={{ width: 40, height: 40, marginRight: 15, }}
-    // />,
-    headerRight: (<Button
-      onPress={() => alert('logout')}
-        title="Logout"
-        color="#000"
-        />
-    ),
+    title: 'Dashboard',
+    headerRight: <Image
+      title= "Start"
+      source={require('./assets/logo.png')}
+      style={{ width: 40, height: 40, marginRight:15,}}
+    />,
     headerLeft: null,
   }
-
-  
 
   render() {
     const { navigation } = this.props;
@@ -107,15 +99,17 @@ export default class Start extends React.Component {
     }
 
     var newName = name;
+    var firstname = '';
+    newName.replace(/"/g, "");
+    newName.split(' ');
+    // We just want to display the first name of the user, will work regardless of how long their name is
+    firstName = newName.split(' ').slice(0, -1).join(' ');
 
     if (userExists == null) {
       return (
         <View style={styles.container}>
           <Text style={styles.textLarge}>
-            Welcome!
-          </Text>
-          <Text style={styles.textMedium}>
-            {newName.replace(/['"]+/g, '')}
+            Welcome, {firstName}!
           </Text>
           <Text style={styles.textSmall}>
             Looks like you haven't joined a course yet.
@@ -135,7 +129,7 @@ export default class Start extends React.Component {
       return (
         <View style={styles.container}>
           <Text style={styles.textLarge}>
-            Welcome, {JSON.stringify(name)}!
+            Welcome, {firstName}!
           </Text>
           <Text style={styles.textSmall}>
             Looks like you're signed up for a few courses!
@@ -153,13 +147,12 @@ export default class Start extends React.Component {
           <Text style={styles.textMedium}>
             Your Courses
           </Text>
-          
           <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, width: width, flex: 2, }}>
             <FlatList
               data={userJsonObj.courses}
               renderItem={({ item }) => (
                 <TouchableHighlight
-                  onPress={() => this.props.navigation.navigate('TestView', { id: item.id, })}
+                  onPress={() => this.props.navigation.navigate('CourseInfo', { id: item.id, })}
                 >
                   <ListItem
                     title={item.title}
@@ -195,7 +188,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     margin: 8,
     padding: 8,
-  },  
+  },
   textXLarge: {
     fontSize: 55,
     padding:20,
@@ -204,8 +197,8 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: '#878CCC',
     padding: 10,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   textMedium: {
     fontSize: 30,
