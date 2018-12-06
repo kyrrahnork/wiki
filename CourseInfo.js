@@ -134,4 +134,14 @@ const styles = StyleSheet.create({
     color: '#878CCC',
     paddingTop:10,
   },
+  textMedium: {
+    fontSize: 30,
+    color: '#878CCC',
+    padding: 5,
+  },
+  textSmall: {
+    fontSize: 16,
+    color: '#000',
+    padding: 5,
+  },
 });
