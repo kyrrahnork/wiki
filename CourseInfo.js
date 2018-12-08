@@ -44,16 +44,24 @@ export default class CourseInfo extends React.Component {
 
   render() {
     const {navigation} = this.props;
-    const campaignId = navigation.getParam('id', '86');
+    const courseId = navigation.getParam('id', '86');
 
     for (var i in jsonCourse.courses) {
-      if (campaignId == jsonCourse.courses[i].id) {
+      if (courseId == jsonCourse.courses[i].id) {
         coursesNum += jsonCourse.courses[i].id;
         studentsNum += jsonCourse.courses[i].editors;
         wordsNum += jsonCourse.courses[i].wordsAdded;
         viewsNum += jsonCourse.courses[i].views;
         createdNum += jsonCourse.courses[i].created;
         editsNum += jsonCourse.courses[i].recentEdits;
+      }
+    }
+
+    for (var i in jsonCourse.courses) {
+      if (courseId == jsonCourse.courses[i].id){
+          var courseName = jsonCourse.courses[i].title;
+          var courseInfo = jsonCourse.courses[i].summary;
+          break;
       }
     }
 
@@ -75,7 +83,7 @@ export default class CourseInfo extends React.Component {
     return (
       <View style={styles.container}>
       <Text style={styles.textLarge}>
-        Course Statistics
+        {courseName}
       </Text>
       <GridView
           items={items}
@@ -84,9 +92,15 @@ export default class CourseInfo extends React.Component {
           <View style={[styles.itemContainer,]}>
               <Text style={styles.itemName}>{item.name}</Text>
               <Text style={styles.itemCode}>{item.code}</Text>
-          </View>
+          </View>         
           )}
         />
+      <Text style={styles.textSummary}>
+        Summary{"\n"}
+        <Text style={styles.textInfo}>
+          {courseInfo}
+        </Text>
+      </Text>
       </View>
     )
   }
@@ -94,13 +108,14 @@ export default class CourseInfo extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection:'column',
+  },
   gridView: {
     paddingTop: 25,
-    flex: 3,
+    flex: 2,
     marginBottom: 0,
   },
   itemContainer: {
@@ -124,24 +139,22 @@ const styles = StyleSheet.create({
     color: '#000',
     margin:0,
   },
-  campaignView:{
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  textSummary: {
+    flex: 2,
+    fontSize:30,
+    color: '#878CCC',
+    paddingBottom:50,
+    textAlign:'center',
+  },  
+  textInfo: {
+    fontSize:16,
+    color: '#000',
+    textAlign:'center',
   },
   textLarge: {
     fontSize:30,
     color: '#878CCC',
     paddingTop:10,
-  },
-  textMedium: {
-    fontSize: 30,
-    color: '#878CCC',
-    padding: 5,
-  },
-  textSmall: {
-    fontSize: 16,
-    color: '#000',
-    padding: 5,
+    textAlign:'center',
   },
 });

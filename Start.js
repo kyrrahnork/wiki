@@ -31,7 +31,6 @@ class LogoTitle extends React.Component {
 }
 
 export default class Start extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -99,7 +98,7 @@ export default class Start extends React.Component {
     }
 
     var newName = name;
-    var firstname = '';
+    var firstName = '';
     newName.replace(/"/g, "");
     newName.split(' ');
     // We just want to display the first name of the user, will work regardless of how long their name is
@@ -121,7 +120,7 @@ export default class Start extends React.Component {
             title="Find your Course"
             color="#878CCC"
             accessibilityLabel="Instructor Account"
-            onPress={() => this.props.navigation.navigate('Login')}
+            onPress={() => this.props.navigation.navigate('CampaignView')}
           />
         </View>
       );
@@ -183,12 +182,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: 5,
   },
-  buttonNotifications: {
-    borderWidth: 1,
-    borderRadius: 4,
-    margin: 8,
-    padding: 8,
-  },
   textXLarge: {
     fontSize: 55,
     padding:20,
@@ -196,18 +189,19 @@ const styles = StyleSheet.create({
   textLarge: {
     fontSize: 40,
     color: '#878CCC',
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 20,
+    textAlign:'center',
   },
   textMedium: {
     fontSize: 30,
     color: '#878CCC',
     padding: 5,
+    textAlign:'center',
   },
   textSmall: {
     fontSize: 16,
     color: '#000',
     padding: 5,
+    textAlign:'center',
   },
 });

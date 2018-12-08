@@ -78,6 +78,13 @@ export default class BackgroundImage extends React.Component {
       }
     }
 
+    for (var i in jsonCampaign.campaigns) {
+      if (campaignId == jsonCampaign.campaigns[i].id) {
+        var campaignName = jsonCampaign.campaigns[i].title;
+        break;
+      }
+    }
+
     const resizeMode = 'center';
     const items = [
       { name: coursesNum, code: 'Courses' }, { name: studentsNum, code: 'Students' },
@@ -96,7 +103,7 @@ export default class BackgroundImage extends React.Component {
     return (
       <View style={styles.container}>
       <Text style={styles.textLarge}>
-        Campaign Statistics
+        {campaignName}
       </Text>
       <GridView
           items={items}
@@ -167,5 +174,6 @@ const styles = StyleSheet.create({
     fontSize:30,
     color: '#878CCC',
     paddingTop:10,
+    textAlign:'center',
   },
 });
