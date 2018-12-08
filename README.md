@@ -23,15 +23,21 @@ $ cd wiki
 $ yarn install or npm install
 ```
 
-### How to start
-```sh
+### How to start in Android Studio Emulator
+```
+Open Android Studio
+Start Emulator
+Open Command Line
 $ react-native run-android
 ```
+### How to start in Expo
+```
+Download Expo App to Testing Device
+Install Expo CLI
+Open Command Line & Navigate to Project Folder 
+expo start
+```
 
-
-### Exponent/ex-navigation version
-Brent Vatne did awesome work to make this run on exponent, checkout his [repo](https://github.com/brentvatne/movieapp)
-- [Open this app in exponent](https://getexponent.com/@community/movieapp)
 
 
 
