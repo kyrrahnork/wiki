@@ -18,18 +18,6 @@ var { height, width } = Dimensions.get('window');
 var jsonCourse = require("./courses");
 var jsonUsers = require("./users");
 
-class LogoTitle extends React.Component {
-  render() {
-    return (
-      <Image
-        title="Start"
-        source={require('./assets/logo.png')}
-        style={{ width: 40, height: 40 }}
-      />
-    );
-  }
-}
-
 export default class Start extends React.Component {
   constructor(props) {
     super(props);

@@ -48,7 +48,6 @@ export default class BackgroundImage extends Component {
 }
 
   render() {
-    const resizeMode = 'center';
     return (
       <View style={styles.container}>
         <Text style={styles.textLarge}>

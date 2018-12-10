@@ -26,6 +26,7 @@ then:
 npm install --save react-native-gridview
 npm install --save react-native-elements@beta
 npm install --save react-navigation
+npm install --save react-native-recycler-listview
 ```
 
 ### How to start in Android Studio Emulator

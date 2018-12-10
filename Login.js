@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Image, View, Button, ScrollView } from 'react-native';
+import { StyleSheet, Text, Image, View, Button, } from 'react-native';
 import Expo from "expo";
 import { androidClientId } from "./superSecretKey";
 import { Permissions, Notifications } from 'expo';
@@ -90,7 +90,6 @@ export default class Login extends React.Component {
     
 
     render() {
-        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 {this.state.signedIn ? (
@@ -122,8 +121,6 @@ const LoggedInPage = props => {
         </View>
     );
 }
-
-
 
 const styles = StyleSheet.create({
     container: {

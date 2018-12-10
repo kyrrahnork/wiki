@@ -13,7 +13,6 @@ console.disableYellowBox = true;
 var { height, width } = Dimensions.get('window');
 
 var jsonCourse = require("./courses");
-var jsonCampaign = require("./campaigns");
 
 // initialize the variables
 var coursesNum = 0;
@@ -64,8 +63,7 @@ export default class CourseInfo extends React.Component {
           break;
       }
     }
-
-    const resizeMode = 'center';
+    
     const items = [
       { name: coursesNum, code: 'CourseId' }, { name: studentsNum, code: 'Students' },
       { name: wordsNum, code: 'Words Added' }, { name: viewsNum, code: 'Views' },
