@@ -20,6 +20,12 @@ Clone this repo
 $ git clone git@github.com:kyrrahnork/wiki.git
 $ cd wiki
 $ yarn install or npm install
+
+then:
+
+npm install --save react-native-gridview
+npm install --save react-native-elements@beta
+npm install --save react-navigation
 ```
 
 ### How to start in Android Studio Emulator
