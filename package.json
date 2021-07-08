@@ -1,6 +1,15 @@
 {
-  "name": "empty-project-template",
+  "name": "wikiedu-dashboard",
+  "version": "1.0.0",
+  "description": "Mobile application to access dashboard.wikiedu.org",
   "main": "node_modules/expo/AppEntry.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kyrrahnork/wiki.git"
+  },
+    "author": {
+    "name": "NSC AD430 Fall 2018"
+  },
   "private": true,
   "scripts": {
     "start": "expo start",
@@ -10,6 +19,10 @@
   },
   "dependencies": {
     "expo": "^31.0.2",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "passport": "^0.4.0",
+    "passport-mediawiki-oauth": "^0.1.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-elements": "^0.19.1",
